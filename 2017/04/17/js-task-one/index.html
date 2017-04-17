@@ -1,0 +1,92 @@
+<!DOCTYPE html><html lang="zh-cn"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge"><meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"><meta name="format-detection" content="telephone=no"><meta name="format-detection" content="email=no"><meta name="description"><meta name="keywords" content="Hexo, Gruntjs, Nodejs, Reactjs, Vuejs"><title>IFE JavaScript Task 01 - Hexo</title><link rel="stylesheet" href="/css/main_style.min.css"><link rel="icon" href="/favicon.ico"></head><body><input id="navi" type="checkbox"><ul class="main-navication"><li><a href="/"><span>Home</span></a></li><li><a href="https://github.com"><span>Github</span></a></li></ul><div class="wrapper" id="wrap"><div class="post-header"><label class="navi-button light" for="navi">MENU</label><img class="background" src="http://callfiles.ueibo.com/hexo-theme-laughing/post_background.jpg"><div class="post-title"><h1 class="title">IFE JavaScript Task 01</h1><ul class="meta"><li><i class="icon icon-author"></i>Chenlei</li><li><i class="icon icon-clock"></i>4 Minutes</li><li><i class="icon icon-calendar"></i>April 17, 2017</li></ul></div></div><div class="article-content" style="max-width:800px"><div style="border: solid 5px"><br>    <label>请输入北京今天空气质量：<input id="aqi-input" type="text"></label><br>    <button id="button">确认填写</button><br><br>    <div>您输入的值是：<span id="aqi-display">尚无录入</span></div><br></div>
+
+
+<script>
+    (function () {
+        /*
+         在注释下方写下代码
+         给按钮button绑定一个点击事件
+         在事件处理函数中
+         获取aqi-input输入的值，并显示在aqi-display中
+         */
+        document.getElementById("button").addEventListener("click", function () {
+            var input_content = document.getElementById('aqi-input').value;
+            document.getElementById('aqi-display').innerHTML = input_content;
+        });
+    })();
+   document.getE
+</script>
+
+<h1 id="DOM基础操作"><a href="#DOM基础操作" class="headerlink" title="DOM基础操作"></a>DOM基础操作</h1><blockquote>
+<p>DOM = Document Object Model，文档对象模型。DOM定义了表示和修改文档所需的对象、这些对象的行为和属性以及这些对象之间的关系。可以把DOM抽象成一个树形表示它的层级结构。如下图:</p>
+</blockquote>
+<p><img src="https://imgsa.baidu.com/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=a6d6d3097bcb0a46912f836b0a0a9d41/810a19d8bc3eb13599df8648a61ea8d3fd1f442c.jpg" alt="DOM树的"></p>
+<h2 id="原生Js中如何获取DOM中的节点元素"><a href="#原生Js中如何获取DOM中的节点元素" class="headerlink" title="原生Js中如何获取DOM中的节点元素?"></a>原生Js中如何获取DOM中的节点元素?</h2><ul>
+<li>直接获取<ul>
+<li>getElementById(): 方法可返回对拥有指定 ID 的第一个对象的引用。<em>注意:在一个页面中,DOM节点元素的ID是唯一的!通过这种获取方式能</em></li>
+<li>getElementsByTagName():方法可返回带有指定标签名的对象的集合。<em>标签可以重复,所以通过标签取某个特定元素不是明智之举</em></li>
+<li>getElementByCLassName():方法可返回带有指定类名的对象的集合。 <em>class可以不唯一,同一个元素可以有多个class名。一般class用来统一设置样式。</em></li>
+<li>getElementsByName() 方法可返回带有指定名称的对象的集合。<em>name不唯一,可用在多个dom节点上</em></li>
+</ul>
+</li>
+<li>间接获取<ul>
+<li>element.childNodes:返回元素子节点的 NodeList。从树中查看就是返回该树节点的子节点列表</li>
+<li>element.firstChild:返回元素的首个子节点。</li>
+<li>element.lastChild:返回元素的最后一个子元素。</li>
+<li>element.parentNode():返回元素的父节点。</li>
+<li>element.previousSibling:返回位于相同节点树层级的前一个元素(返回上一个兄弟元素)。<blockquote>
+<p>这些访问节点的方式在jQuery中都有所封装,获得更便捷的操作。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="通过JS操作节点"><a href="#通过JS操作节点" class="headerlink" title="通过JS操作节点"></a>通过JS操作节点</h2><ul>
+<li>对JS中的DOM节点进行的操作主要有<ul>
+<li>获取或者设置节点元素中的内容<ul>
+<li>innerHTML :属性设置或返回该标签内的HTML。也就是从对象的起始位置到终止位置的全部内容,包括Html标签。</li>
+<li>outerHTML：属性设置或返回该标签及标签内的HTML。也就是从对象的该标签起始到终止位置的全部内容,包括Html标签。<br>如果要输出不含HTML标签的内容，可以使用innerHTML取得包含HTML标签的内容后，再用正则表达式去除HTML标签，</li>
+<li>inneText：从起始位置到终止位置的内容，但它去除html标签。（只能在IE和chrome下使用）</li>
+<li>outerText 设置(包括标签)或获取(不包括标签)对象的文本</li>
+<li>value：属性可设置或返回密码域的默认值。获取文本框的值</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="为DOM元素添加事件"><a href="#为DOM元素添加事件" class="headerlink" title="为DOM元素添加事件"></a>为DOM元素添加事件</h2><ul>
+<li><p>addEventListener() 方法用于向指定元素添加事件句柄。</p>
+<ul>
+<li>为 <code>&lt;button&gt;</code> 元素添加点击事件。 当用户点击按钮时，在 id=”demo” 的 <p> 元素上输出 “Hello World” :<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">document.getElementById(&quot;myBtn&quot;).addEventListener(&quot;click&quot;, function()&#123;</div><div class="line">document.getElementById(&quot;demo&quot;).innerHTML = &quot;Hello World&quot;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</p></li>
+</ul>
+</li>
+<li><p>语法<br>  <code>element.addEventListener(event, function, useCapture)</code></p>
+<ul>
+<li>event:必须。字符串，指定事件名。<a href="http://www.runoob.com/jsref/dom-obj-event.html" target="_blank" rel="external">HTML DOM 事件</a></li>
+<li>function: 必须。指定要事件触发时执行的函数。</li>
+<li>可选。布尔值，指定事件是否在捕获或冒泡阶段执行。<ul>
+<li>true - 事件句柄在捕获阶段执行</li>
+<li>false- false- 默认。事件句柄在冒泡阶段执行</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="jQuery相关用法"><a href="#jQuery相关用法" class="headerlink" title="jQuery相关用法"></a>jQuery相关用法</h2><ul>
+<li><a href="http://api.jquery.com/category/events/mouse-events/" target="_blank" rel="external">Mouse Events</a></li>
+<li><a href="http://api.jquery.com/category/selectors/attribute-selectors/" target="_blank" rel="external">属性选择器</a></li>
+</ul>
+</div><div class="article-meta" style="max-width:800px"></div><div class="article-comment" style="max-width:800px"><div class="ds-thread" id="ds-thread" data-thread-key="cj1lqw4d10002hdfywan5q60w" data-title="IFE JavaScript Task 01" data-url="http://yoursite.com/2017/04/17/js-task-one/" site-name="ueibo"></div><script>var siteName = document.getElementById('ds-thread').getAttribute('site-name');
+var duoshuoQuery = {short_name: siteName};
+(function() {
+  var ds = document.createElement('script');
+  ds.type = 'text/javascript';ds.async = true;
+  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+  ds.charset = 'UTF-8';
+  (document.getElementsByTagName('head')[0] 
+  || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();</script></div><ul class="navication"><li class="home"><a href="/"><i class="icon icon-home"></i></a></li><li><a href="/2017/03/29/Hello-word2/"><i class="icon icon-arror-right"></i></a></li></ul><div class="page-footer"><div class="top"><ul class="social"><li><a href="https://github.com/chenfucaijun/chenfucaijun.github.io" title="Github" target="_blank"><i class="icon icon-github"></i></a></li><li><a href="https://weibo.com/jackclay" title="Weibo" target="_blank"><i class="icon icon-weibo"></i></a></li></ul></div><div class="bottom"><p class="copyright">© 2017 Hexo<br><small>POWER BY <a href="https://hexo.io" target="_blank">HEXO</a></small><small>, THEME BY <a href="https://github.com/BoizZ/hexo-theme-laughing" target="_blank">LAUGHING</a></small></p></div></div></div><script>var wrap = document.getElementById('wrap');
+window.onload = function () {
+  wrap.className += ' done';
+}</script></body></html>
