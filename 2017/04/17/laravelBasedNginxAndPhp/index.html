@@ -1,0 +1,159 @@
+<!DOCTYPE html><html lang="zh-cn"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge"><meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"><meta name="format-detection" content="telephone=no"><meta name="format-detection" content="email=no"><meta name="description" content="陈磊的个人网站"><meta name="keywords" content="Hexo, Gruntjs, Nodejs, Reactjs, Vuejs"><title>使用nginx配置Laravel中的虚拟站点 - chenlei</title><link rel="stylesheet" href="/css/main_style.min.css"><link rel="icon" href="/favicon.ico"></head><body><input id="navi" type="checkbox"><ul class="main-navication"><li><a href="/"><span>Home</span></a></li><li><a href="https://github.com/chenfucaijun/chenfucaijun.github.io"><span>Github</span></a></li><li><a href="/aboutme"><span>About Me</span></a></li></ul><div class="wrapper" id="wrap"><div class="post-header"><label class="navi-button light" for="navi">MENU</label><img class="background" src="/img/post_background.jpg"><div class="post-title"><h1 class="title">使用nginx配置Laravel中的虚拟站点</h1><ul class="meta"><li><i class="icon icon-author"></i>chenlei</li><li><i class="icon icon-clock"></i>9 Minutes</li><li><i class="icon icon-calendar"></i>2017年4月17日</li></ul></div></div><div class="article-content" style="max-width:800px"><p>laravel官网提供的安装方式是composer方式，可在官网文档中看到，安装完毕，配置一下，<br>输入<br><code>php artisan serve</code><br>然后访问localhost:8000，你也可以看到相对应的Laravel默认页面：<br><img src="https://blog.openlucius.com/sites/default/files/Laravel-browser.png" alt="Laravel 默认界面"></p>
+<p>这种方式是使用laravel 自动配置的虚拟站点，<br>它有如下缺点：</p>
+<ul>
+<li>修改代码后每次都要重新部署一遍很麻烦。</li>
+<li>如果电脑里有多个laravel 工程文件，默认的端口80需要修改，当然如果是homestead环境另当别论。</li>
+</ul>
+<p><strong>Lravel 工程目录结构图：</strong><br><img src="http://img.blog.csdn.net/20160323130110073" alt="Laravel 目录"></p>
+<p>下面使用nginx来配置虚拟站点，nginx是一个HTTP和反向代理服务器,使用nginx来配置Laravel工程的原理就是：</p>
+<ol>
+<li><p>输入指定域名，如www.mooe.com</p>
+</li>
+<li><p>nginx会查找对应的配置文件（<a href="http://blog.csdn.net/iamduoluo/article/details/38346291" target="_blank" rel="external">Mac 下 Nginx、MySQL、PHP-FPM 的安装配置</a>）</p>
+</li>
+<li><p>在配置文件nginx.conf中检索laravel根目录下的public文件，在该文件中查找index.php作为首页入口。在.env正确配置后laravel就会自动加载该index.php</p>
+</li>
+</ol>
+<p>下面进入配置文件的设置：</p>
+<h4 id="1-找到nginx对应的目录（我的目录不是nginx默认目录，默认根目录为-usr-local-nginx-）"><a href="#1-找到nginx对应的目录（我的目录不是nginx默认目录，默认根目录为-usr-local-nginx-）" class="headerlink" title="1. 找到nginx对应的目录（我的目录不是nginx默认目录，默认根目录为/usr/local/nginx/）"></a><strong>1. 找到nginx对应的目录（我的目录不是nginx默认目录，默认根目录为/usr/local/nginx/）</strong></h4><p><code><br>➜  ~  cd /usr/local/etc/nginx<br>➜  nginx git:(master) ls<br>conf.d<br> sites-available<br> sites-enabled<br> nginx.conf<br>➜  nginx git:(master)<br></code></p>
+<p>默认会有nginx.conf,其他三个自己添加的<br>可以直接在nginx.conf修改，具体可参照<a href="https://www.ttlsa.com/nginx/nginx-configure-vhosts/" target="_blank" rel="external">nginx.conf</a></p>
+<p>为了能配置多个站点，而且结构清晰，</p>
+<h4 id="2-首先先修改nginx-conf"><a href="#2-首先先修改nginx-conf" class="headerlink" title="2.首先先修改nginx.conf"></a><strong>2.首先先修改nginx.conf</strong></h4><p><code><br>➜  nginx git:(master) sudo vim nginx.conf</code></p>
+<p>user  _www;<br>worker_processes  1;</p>
+<p>#pid        logs/nginx.pid;</p>
+<p>events {<br>    worker_connections  1024;<br>}</p>
+<p>http {<br>    include       mime.types;<br>    default_type  application/octet-stream;</p>
+<pre><code>#log_format  main  &apos;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &apos;
+#                  &apos;$status $body_bytes_sent &quot;$http_referer&quot; &apos;
+#                  &apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&apos;;
+
+#access_log  logs/access.log  main;
+
+sendfile        on;
+#tcp_nopush     on;
+
+#keepalive_timeout  0;
+keepalive_timeout  65;
+
+
+
+include /usr/local/etc/nginx/conf.d/*.conf;
+include /usr/local/etc/nginx/sites-enabled/*;
+</code></pre><p>}<br></p>
+<ul>
+<li>我这里的_www是我的一个用户组，权限相当于wheel，<br>可以看出它是incude了 conf.d目录下的所以.conf文件和sites-enabled下的所有文件</li>
+</ul>
+<h4 id="3-下面配置我的www-mooe-com的配置文件，我起名mooe-app，名字任意起的"><a href="#3-下面配置我的www-mooe-com的配置文件，我起名mooe-app，名字任意起的" class="headerlink" title="3.下面配置我的www.mooe.com的配置文件，我起名mooe.app，名字任意起的"></a><strong>3.下面配置我的www.mooe.com的配置文件，我起名mooe.app，名字任意起的</strong></h4><p><code><br>➜  conf.d git:(master) cat mooe.app<br>listen 80;<br>server_name mooe.com www.mooe.com;<br>error_log /var/log/nginx/mooeapp/mooe_error.log;<br>access_log /var/log/nginx/mooeapp/mooe_access.log php-fpm-main;<br>root   /var/www/cloudlab/cloudlab/src/cloudlab/public/;</code></p>
+<p>这里的root 目录就是你的laravel工程目录下的public文件</p>
+<p>➜  conf.d git:(master) cat logs.mooe.app<br>server_name logs.mooeapp.com;<br>error_log /var/log/nginx/shamiapp/logs_error.log;<br>access_log /var/log/nginx/shamiapp/logs_access.log;<br>root  /Users/chenlei/cloudlab/cloudlab/src/cloudlab/storage/;<br>autoindex on;<br>charset utf-8;<br></p>
+<p><strong>这里的日志根目录是在storage里的</strong></p>
+<p>下面进入sites-available里的配置文件，这里之所以要设置site-available是为了设置一个可选列表，方便管理，真正启用配置的文件是在site-enabled里，<br>意思就是在site-available放所有的配置文件，最终启用哪个，再加到site-enabled才能起作用。</p>
+<h4 id="4-配置mooe-conf"><a href="#4-配置mooe-conf" class="headerlink" title="4.配置mooe.conf"></a><strong>4.配置mooe.conf</strong></h4><p>sites-available-&gt;mooe.conf<br><code><br>➜  nginx git:(master) cd sites-available<br>➜  sites-available git:(master) ls<br>h5.shami.conf   logs.mooe.conf  mooe.conf<br>img.shami.conf  logs.shami.conf shami.conf<br>➜  sites-available git:(master) cat mooe.conf<br>server<br>{<br>    include conf.d/mooe.app; </code></p>
+<pre><code>location / {
+root  /var/www/cloudlab/cloudlab/src/cloudlab/public/;
+    index  index.html index.htm index.php;
+    try_files $uri $uri/ /index.php?$query_string;
+}
+location ~ ^/(img|upload*)/.*.(html|htm|shtml|php)$ {
+    types { }
+    default_type text/plain;
+}
+location ~ \.php$ {
+root  /var/www/cloudlab/cloudlab/src/cloudlab/public/;
+    include fastcgi_params;
+    fastcgi_pass    localhost_fastcgi_fpm;
+}
+location ~* ^.+.(jpg|jpeg|gif|css|png|js|ico|xml)$ {
+    access_log        off;
+    expires           30d;
+}
+location ~ /(data|conf|bin|inc)/ {
+    deny all;
+}
+
+location ~* \.(bak|swp|swo|txt|config|conf|DS_Store|inc)$ {
+    deny all;
+}
+
+location ~* \.(pl|cgi|py|sh|lua)$
+{
+    return 444;
+}
+
+location ~ /\. {
+    deny  all;
+}
+location = /robots.txt  { access_log off; log_not_found off; }
+location = /favicon.ico { access_log off; log_not_found off; }  
+</code></pre><p>}<br></p>
+<h4 id="5-配置log-mooe-conf"><a href="#5-配置log-mooe-conf" class="headerlink" title="5.配置log.mooe.conf"></a><strong>5.配置log.mooe.conf</strong></h4><p>sites-available-&gt;logs.mooe.conf<br><code><br>➜  sites-available git:(master) cat logs.mooe.conf<br>server<br>{<br>    include conf.d/logs.mooe.app;<br>    location / {<br>        default_type text/plain;<br>    }<br>    location = /robots.txt  { access_log off; log_not_found off; }<br>    location = /favicon.ico { access_log off; log_not_found off; }<br>}<br>➜  sites-available git:(master)<br></code></p>
+<h4 id="6-下面进入到sites-anabled修改mooe-conf和logs-mooe-conf"><a href="#6-下面进入到sites-anabled修改mooe-conf和logs-mooe-conf" class="headerlink" title="6.下面进入到sites-anabled修改mooe.conf和logs.mooe.conf"></a><strong>6.下面进入到sites-anabled修改mooe.conf和logs.mooe.conf</strong></h4><p>sites-enabled -&gt;mooe.conf<br><code><br>➜  nginx git:(master) cd sites-enabled<br>➜  sites-enabled git:(master) ls<br>h5.shami.conf   logs.mooe.conf  mooe.conf<br>img.shami.conf  logs.shami.conf shami.conf<br>➜  sites-enabled git:(master) cat mooe.conf<br>server<br>{<br>    include conf.d/mooe.app; </code></p>
+<pre><code>location / {
+root  /var/www/cloudlab/cloudlab/src/cloudlab/public/;
+    index  index.html index.htm index.php;
+    try_files $uri $uri/ /index.php?$query_string;
+}
+
+location ~ ^/(img|upload*)/.*.(html|htm|shtml|php)$ {
+    types { }
+    default_type text/plain;
+}
+location ~ \.php$ {
+root  /var/www/cloudlab/cloudlab/src/cloudlab/public/;
+    include fastcgi_params;
+    fastcgi_pass    localhost_fastcgi_fpm;
+}
+location ~* ^.+.(jpg|jpeg|gif|css|png|js|ico|xml)$ {
+    access_log        off;
+    expires           30d;
+}
+location ~ /(data|conf|bin|inc)/ {
+    deny all;
+}
+
+location ~* \.(bak|swp|swo|txt|config|conf|DS_Store|inc)$ {
+    deny all;
+}
+
+location ~* \.(pl|cgi|py|sh|lua)$
+{
+    return 444;
+}
+
+location ~ /\. {
+    deny  all;
+}
+location = /robots.txt  { access_log off; log_not_found off; }
+location = /favicon.ico { access_log off; log_not_found off; }  
+</code></pre><p>}</p>
+<ul>
+<li>sites-enabled -&gt;logs.mooe.conf<br>➜  sites-enabled git:(master) cat logs.mooe.conf<br>server<br>{<br>  include conf.d/logs.mooe.app;<br>  location / {<pre><code>default_type text/plain;
+</code></pre>  }<br>  location = /robots.txt  { access_log off; log_not_found off; }<br>  location = /favicon.ico { access_log off; log_not_found off; }<br>}</li>
+</ul>
+<p><code></code></p>
+<h4 id="7-主要的配置文件修改完毕，修改hosts文件"><a href="#7-主要的配置文件修改完毕，修改hosts文件" class="headerlink" title="7.主要的配置文件修改完毕，修改hosts文件"></a>7.主要的配置文件修改完毕，修改hosts文件</h4><p><code><br>➜  ~  sudo vim /etc/hosts</code></p>
+<p>127.0.0.1   www.mooe.com<br>127.0.0.1    mooe.com<br></p>
+<h4 id="8-下面重启nginx"><a href="#8-下面重启nginx" class="headerlink" title="8.下面重启nginx"></a><strong>8.下面重启nginx</strong></h4><p><code><br>➜  ~  sudo nginx -s reload<br></code></p>
+<p>当然php的服务也要启动，mac自带的php是不行的，需要配置一下，相关配置方法在<a href="http://blog.csdn.net/iamduoluo/article/details/38346291" target="_blank" rel="external">Mac 下 Nginx、MySQL、PHP-FPM 的安装配置</a>）</p>
+<p>运行成功后，在地址栏输入www.mooe.com就会跳转到laravel工程文件里写的index.php，渲染对应的主页了。<br><img src="http://img.blog.csdn.net/20160323134451677" alt="主页显示成功"></p>
+<p>如果没有写相关的blade，自然就是默认欢迎页面，<br><img src="https://wt-prj.oss.aliyuncs.com/0d06af79c49d4e08abb1ab3f7ab6e860/bc3c6801-0458-4041-8ea2-46d5e265e3d6.png" alt="Laravel 默认界面"></p>
+<h4 id="9-如果出现500访问资源错误，那么很有可能是Laravel里的权限设置有问题"><a href="#9-如果出现500访问资源错误，那么很有可能是Laravel里的权限设置有问题" class="headerlink" title="**9.如果出现500访问资源错误，那么很有可能是Laravel里的权限设置有问题"></a>**9.如果出现500访问资源错误，那么很有可能是Laravel里的权限设置有问题</h4><p>可设置如下**</p>
+<p><code><br>➜  cloudlab git:(master) sudo chmod -R 775 bootstrap<br>➜  cloudlab git:(master) ✗ sudo chmod -R 775 storage<br>➜  cloudlab git:(master) ✗ sudo chown -R _www:_www bootstrap<br>➜  cloudlab git:(master) ✗ sudo chown -R _www:_www storage<br></code><br>我这里的_www是nginx 所属组。</p>
+</div><div class="article-meta" style="max-width:800px"></div><ul class="navication"><li class="home"><a href="/"><i class="icon icon-home"></i></a></li><li><a href="/2017/04/17/ecs/"><i class="icon icon-arror-right"></i></a></li></ul><div class="page-footer"><div class="top"><ul class="social"><li><a href="https://github.com/chenfucaijun/chenfucaijun.github.io" title="Github" target="_blank"><i class="icon icon-github"></i></a></li><li><a href="https://weibo.com/jackclay" title="Weibo" target="_blank"><i class="icon icon-weibo"></i></a></li><li><a href="Mailto:chenlei163mail@163.com" title="Email" target="_blank"><i class="icon icon-email"></i></a></li></ul></div><div class="bottom"><p class="copyright">© 2017 chenlei<br><small>POWER BY <a href="https://hexo.io" target="_blank">HEXO</a></small><small>, THEME BY <a href="https://github.com/BoizZ/hexo-theme-laughing" target="_blank">LAUGHING</a></small></p></div></div></div><script>var wrap = document.getElementById('wrap');
+window.onload = function () {
+  wrap.className += ' done';
+};
+(function (i, s, o, g, r, a, m) {
+  i['GoogleAnalyticsObject'] = r;
+  i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+  a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+  a.async = 1;
+  a.src = g;
+  m.parentNode.insertBefore(a, m)
+})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+ga('create', 'UA-93169570-1', 'auto');
+ga('send', 'pageview');</script></body></html>
