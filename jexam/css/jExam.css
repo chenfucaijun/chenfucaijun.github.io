@@ -1,0 +1,702 @@
+html, body {
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    color: #ffffff;
+}
+
+body {
+    background-color: #f8f9fb;
+}
+
+@font-face {
+    font-family: Flat-UI-Icons;
+    src: url(../fonts/Flat-UI-Icons.eot?#iefix) format('embedded-opentype'), url(https://chenfucaijun.github.io/fonts/Flat-UI-Icons.woff) format('woff'), url(https://chenfucaijun.github.io/fonts/Flat-UI-Icons.ttf) format('truetype');
+    font-weight: 400;
+    font-style: normal
+}
+
+/*清除浮动*/
+.clearfix {
+    display: block;
+    zoom: 1;
+}
+
+.clearfix:after, .clearfix:before {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+/*容器*/
+.div-main-container {
+    background-color: #FFFFFF;
+    width: 1100px;
+    height: auto;
+    margin: 20px auto;
+}
+
+.div-main {
+    width: 830px;
+    height: auto;
+    border: 1px solid #34495E;
+    border-radius: 3px;
+    float: left;
+}
+
+/*结果页*/
+.div-main-result {
+    width: 80%;
+    height: auto;
+    border: 1px solid #34495E;
+    border-radius: 3px;
+    margin: 1px;
+}
+
+.result-left-inf {
+    width: 500px;
+    float: left;
+}
+
+.result-right-inf {
+    width: 400px;
+    float: right;
+    font-size: 50px;
+
+    background-color: #ecf0f5;
+    border-radius: 6px;
+    padding: 14px;
+    /*position: relative;*/
+    text-align: center;
+    top: 1px;
+}
+
+/*进度条*/
+.div-progress {
+    background: #2C3E50;
+    border-radius: 4px 4px 0 0;
+    position: relative;
+    padding: 10px 200px 10px 20px;
+    white-space: nowrap;
+
+}
+
+.div-progress .q-progress {
+    width: 90%;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.q-progress {
+    background: #ebedef;
+    overflow: hidden;
+    border-radius: 20px;
+    height: 15px;
+}
+
+.q-progress-bar {
+    width: 20%;
+    height: 100%;
+    font-size: 12px;
+    line-height: 20px;
+    color: #fff;
+    text-align: center;
+    background-color: #27ad60;
+}
+
+.q-num {
+    color: #FFFFFF;
+    display: inline-block;
+    font-size: 20px;
+    width: 80px;
+}
+
+.q-time {
+    display: inline-block;
+    color: #FFFFFF;
+    font-size: 20px;
+
+}
+
+.question-title-content {
+    margin-left: 5px;
+}
+
+.fui-pause-set:hover {
+    color: #27ad60;
+    cursor: pointer;
+
+}
+
+.q-time-div {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+}
+
+/*题型提示*/
+.question-title {
+    border-bottom: 1px solid #27ad60;
+    padding: 10px 15px 5px 15px;
+    font-size: 18px;
+
+}
+
+.fui-new:before {
+    content: "\e628";
+}
+
+/*问题区域*/
+.div-question {
+    position: relative;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.question-content {
+    padding: 10px 5px 10px 15px;
+    line-height: 15px;
+    font-size: 20px;
+
+}
+
+.div-question .question-content {
+    width: 95%;
+    margin: 10px auto;
+    height: auto;
+    padding: 17px 25px;
+    border: 1px solid #eceef4;
+    line-height: 27px;
+    font-size: 16px;
+    color: #333;
+    background: #F8F9FB;
+    font-weight: 500;
+}
+
+/*选项区域*/
+.div-question .question-option {
+    width: 95%;
+    margin: 10px auto;
+    height: auto;
+    padding: 10px 25px;
+    border: 1px dashed #95A5A6;
+    line-height: 27px;
+    font-size: 16px;
+    color: #333;
+    background: #ECF0F1;
+}
+
+.div-question .question-option:hover {
+
+    cursor: pointer;
+    border: 1px solid #95A5A6;
+    background: #BDC3C7;
+    font-weight: 500;
+
+}
+
+.question-option.selected {
+
+    color: #F1C40F;
+    border: 1px solid #F39C12;
+    font-weight: 500;
+
+}
+
+/*选项图标*/
+.question-option .option-icons {
+    border: 2px solid #1ABC9C;
+    /*border-radius: 1px;*/
+    vertical-align: -3px;
+    width: 16px;
+    height: 16px;
+    background: #FFF;
+    display: inline-block;
+    margin-right: 3px;
+    border-radius: 20%;
+    line-height: normal;
+    position: relative;
+
+}
+
+/*选项选中的样式*/
+
+.question-option.selected .option-icons:before {
+    font-size: 14px;
+    position: absolute;
+    border-color: #FFF
+}
+
+.question-option.selected .option-icons:before {
+    font-family: Flat-UI-Icons;
+    content: "\e034";
+    color: #1ABC9C;
+    font-size: 14px;
+    margin-top: -1px;
+    margin-left: -1px
+}
+
+.checkbox.checked .icons:before {
+    content: "\e034";
+    color: #00bc9b;
+    font-size: 16px;
+    margin-top: -1px;
+    margin-left: -1px
+}
+
+.div-next {
+    float: right;
+    margin: 0 20px 20px 20px;
+}
+
+/*难度值星星表示********************/
+label.star {
+    float: right;
+    padding: 10px;
+    font-size: 36px;
+    color: #444;
+    transition: all .2s;
+}
+
+input.star ~ label.star:before {
+    content: '\f005';
+    color: #FD4;
+    transition: all .25s;
+}
+
+label.star:before {
+    content: '\f006';
+    font-family: FontAwesome;
+}
+
+/*难度值星星表示end*****************************/
+
+/*右边区域*/
+.div-right {
+    float: right;
+    overflow: hidden
+
+}
+
+.div-paper-info {
+    width: 250px;
+    height: auto;
+    margin-bottom: 18px;
+    color: #FFFFFF;
+    background-color: #34495E;
+    border-radius: 6px;
+    padding: 10px 10px;
+    position: relative;
+    text-align: center;
+
+}
+
+/*答题卡*/
+.div-choose-card {
+    width: 250px;
+    height: auto;
+    color: #FFFFFF;
+    background-color: #34495E;
+    border-radius: 6px;
+    padding: 5px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.div-choose-card p {
+    text-align: center;
+
+}
+
+.answer-sheet-num {
+    list-style: none;
+    padding-left: 22px;
+}
+
+.answer-sheet-num li {
+    float: left;
+    margin-right: 1px
+
+}
+
+.answer-sheet-num a {
+    display: block;
+    color: #dce4ec;
+    font-size: 16px;
+    width: 40px;
+    text-align: center;
+    height: 40px;
+    line-height: 40px
+}
+
+.answer-sheet-num a.answer-done {
+    color: #59b59c
+}
+
+.answer-sheet-num a.answering-num, .answer-sheet-num a:hover {
+    display: block;
+    background: #59b59c;
+    color: #FFF
+}
+
+/*Modal位置,调整为居中*/
+
+.modal {
+    text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+    .modal:before {
+        display: inline-block;
+        vertical-align: middle;
+        content: " ";
+        height: 100%;
+    }
+}
+
+.modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+}
+
+/*结果页样式*/
+.result-main-container {
+    /*background-color: #FFFFFF;*/
+
+    width: 1045px;
+    margin: 10px auto;
+    height: auto;
+    overflow: hidden;
+    clear: both;
+    background: white;
+    padding: 20px;
+
+}
+
+.result-div-paper-info {
+    width: 84%;
+    height: auto;
+    margin: auto;
+    margin-bottom: 18px;
+    margin-top: 5px;
+    color: #2C3E50;
+    background-color: #FFFFFF;
+    border: 1px solid #34495E;
+    border-radius: 6px;
+    padding: 10px 10px;
+    position: relative;
+
+}
+
+/*结果答题卡*/
+.result-div-choose-card {
+    width: auto;
+    height: auto;
+    color: #2C3E50;
+    background-color: white;
+    border-radius: 6px;
+    padding: 5px;
+    position: relative;
+    margin: 0 auto;
+    border-bottom: 1px solid #ECF0F1;
+}
+
+.div-choose-card p {
+    text-align: center;
+
+}
+
+.result-answer-sheet-num {
+    list-style: none;
+    padding-left: 22px;
+}
+
+.result-answer-sheet-num li {
+    float: left;
+    margin-right: 1px
+
+}
+
+.result-answer-sheet-num a {
+    display: block;
+    color: #dce4ec;
+    font-size: 16px;
+    width: 40px;
+    text-align: center;
+    height: 40px;
+    line-height: 40px
+}
+
+.result-answer-sheet-num a.result-answer-done {
+    color: #59b59c
+}
+
+.result-answer-sheet-num a:hover {
+    border: 1px solid #2C3E50;
+}
+
+.result-answer-sheet-num a.result-answering-num, .result-answer-sheet-num a:hover {
+    /*display: block;*/
+    /*background: #59b59c;*/
+    cursor: pointer;
+    color: #FFF;
+    border: 2px solid #34495E;
+}
+
+.result-answer-sheet-num a.result-true-num {
+    display: block;
+    background: #2ECC71;
+    color: #FFF
+}
+
+.result-answer-sheet-num a.result-false-num {
+    display: block;
+    background: #E74C3C;
+    color: #FFF
+}
+
+/*结果页题号*/
+
+.result-question-content-num {
+
+    font-weight: 500;
+}
+
+/*结果问题区域*/
+.result-div-question {
+    position: relative;
+    margin-bottom: 20px;
+    display: block;
+}
+
+/*结果：选项内容************************************/
+
+.result-question-content {
+    padding: 10px 5px 10px 15px;
+    line-height: 15px;
+    font-size: 20px;
+
+}
+
+.result-div-question .result-question-content {
+    width: 95%;
+    margin: 10px auto;
+    height: auto;
+    padding: 17px 25px;
+    /*border: 1px solid #eceef4;*/
+    line-height: 27px;
+    font-size: 20px;
+    color: #333;
+    /*background: #F8F9FB;*/
+    font-weight: 500;
+}
+
+/*选项区域*/
+.result-div-question .result-question-option {
+    width: 95%;
+    margin: 10px auto;
+    height: auto;
+    padding: 10px 25px;
+    /*border: 1px dashed #95A5A6;*/
+    line-height: 27px;
+    font-size: 16px;
+    color: #333;
+    background: #ECF0F1;
+}
+
+.result-div-question .question-option:hover {
+
+    cursor: pointer;
+    border: 1px solid #95A5A6;
+    background: #BDC3C7;
+    font-weight: 500;
+
+}
+
+.result-question-option.selected {
+
+    color: #F1C40F;
+    border: 1px solid #F39C12;
+    font-weight: 500;
+
+}
+
+/*选项图标*/
+.result-question-option .result-option-icons {
+    border: 2px solid #1ABC9C;
+    /*border-radius: 1px;*/
+    vertical-align: -3px;
+    width: 16px;
+    height: 16px;
+    background: #FFF;
+    display: inline-block;
+    margin-right: 3px;
+    border-radius: 20%;
+    line-height: normal;
+    position: relative;
+
+}
+
+/*选项选中的样式*/
+
+.result-question-option.selected .result-option-icons:before {
+    font-size: 14px;
+    position: absolute;
+    border-color: #FFF
+}
+
+.result-question-option.selected .result-option-icons:before {
+    font-family: Flat-UI-Icons;
+    content: "\e034";
+    color: #1ABC9C;
+    font-size: 14px;
+    /*margin-top: -1px;*/
+    margin-bottom: 1px;
+    margin-left: -1px
+}
+
+/*错误提示图片*/
+
+/*.result-icon-true{*/
+/*display: inline-block;*/
+/*width: 32px;*/
+/*height: 32px;*/
+/*vertical-align: -10px;*/
+/*background-image:url(../imgs/true32_32.png);*/
+/*margin-top: 0;*/
+/*padding: 0;*/
+
+/*}*/
+
+/*状态0*/
+.result-div-question .result-question-option.result-status-0 {
+    border: 3px solid #9B59B6;
+    color: #FFFFFF;
+    /*border: 1px solid #F39C12;*/
+    background-color: #1ABC9C;
+}
+
+.result-status-0 .result-icon {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    vertical-align: -10px;
+    /*background-image:url(../imgs/true32_32.png);*/
+    margin-top: 0;
+    padding: 0;
+
+}
+
+.result-div-question .result-question-option.result-status-1 {
+    color: #FFFFFF;
+    background-color: #1ABC9C;
+    border: 2px solid #1ABC9C;
+
+}
+
+.result-status-1 .result-icon {
+    display: inline-block;
+
+    /*width: 32px;*/
+    /*height: 32px;*/
+    /*vertical-align: -10px;*/
+    /*/!*background-image:url(../imgs/true32_32.png);*!/*/
+    /*margin-top: 0;*/
+    /*padding: 0;*/
+
+}
+
+.result-div-question .result-question-option.result-status-2 {
+    border: 2px solid #9B59B6;
+    /*color: #E74C3C;*/
+    /*border: 1px solid #F39C12;*/
+    /*font-weight: 500;*/
+}
+
+.result-status-2 .result-icon {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    vertical-align: -10px;
+    margin-top: 0;
+    padding: 0;
+
+}
+
+.result-div-question .result-question-option.result-status-3 {
+    border: 2px solid #ECF0F1;
+
+    width: 95%;
+    margin: 10px auto;
+    height: auto;
+    padding: 10px 25px;
+    line-height: 27px;
+    font-size: 16px;
+    color: #333;
+    background: #ECF0F1;
+
+}
+
+.result-status-3 .result-icon {
+
+}
+
+.result-icon-true {
+    margin-left: 25px;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-color: #1ABC9C;
+
+}
+
+.result-icon-check {
+    display: inline-block;
+    width: 16px;
+    height: 40px;
+    border: 2px solid #9B59B6;
+
+}
+
+.result-type-hint {
+
+    margin-top: 20px;
+
+}
+
+.checkbox.checked .icons:before {
+    content: "\e034";
+    color: #00bc9b;
+    font-size: 16px;
+    margin-top: -1px;
+    margin-left: -1px
+}
+
+.result-left-info {
+    width: 500px;
+    float: left;
+    left: 10px;
+}
+
+.result-right-info {
+    width: 400px;
+    float: left;
+    font-size: 50px;
+
+    background-color: #ecf0f5;
+    border-radius: 6px;
+    padding: 14px;
+    /*position: relative;*/
+    text-align: center;
+}
+
+.result-right-info .result-score {
+    color: #c0392b;
+    font-size: 100px;
+    margin: 1px 1px 1px 1px;
+}

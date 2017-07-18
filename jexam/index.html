@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>jExam</title>
+
+    <meta charset="utf-8">
+    <meta name="description" content="jExam是一个可以将指定题目内容转为可以在线答题并自动评分的jQuery插件">
+
+    <link href="http://fonts.googleapis.com/css?family=Alfa+Slab+One" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Neuton:400,700,400italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Anonymous+Pro" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Cabin+Sketch" rel="stylesheet" type="text/css">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/flat-ui/2.3.0/css/flat-ui.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/jExam.css">
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Microsoft yahei', 'Neuton', serif;
+        }
+    </style>
+
+    <!-- This is an example of jQuery.pin in use. Check the very bottom for the javascript. -->
+
+</head>
+<body>
+<header class="clearfix">
+    <div class="wrapper">
+        <h1 class="logo"><span>jExam</span>.js</h1>
+    </div>
+</header>
+<div class="wrapper">
+    <h2 class="sub">Make Exam Question Online Quickly! <br>让在线做试题更快捷！</h2>
+    <section class="container clearfix">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="lead">
+                    在线教育的时代已经来临，<strong>在线答题</strong> 的场景越来越普遍！
+                </p>
+
+                <p style="color:firebrick">
+                    <strong>jExam.js</strong> 能帮你完成这些需求。它能将规定格式(json)的试题文本转化为可以被用户在线答题并自动评分的交互式场景。
+                </p>
+                <h2>下载此jQuery插件</h2>
+                <p>
+                    从 <a href="https://github.com/chenfucaijun/jExam" target="_blank" rel="external">Github 代码库</a> 下载 <a href="https://github.com/chenfucaijun/jExam/blob/master/css/jExam.css" target="_blank" rel="external">jExam.css</a>和 <a href="https://github.com/chenfucaijun/jExam/blob/master/js/jExam.js" target="_blank" rel="external">jExam.js</a>文件。同时引入一些依赖文件
+                </p>
+                <h2>css</h2>
+                <pre style="width: 80% "><code>
+
+&lt;link href=&quot;https://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;link href=&quot;https://cdn.bootcss.com/flat-ui/2.3.0/css/flat-ui.min.css&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;css/jExam.css&quot;&gt;
+                                </code></pre>
+                <h2>js</h2>
+                <pre style="width: 80% "><code>
+&lt;script&gt;
+ &lt;script src=&quot;https://code.jquery.com/jquery-2.2.4.min.js&quot;&gt;&lt;/script&gt;
+ &lt;script src=&quot;https://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js&quot;&gt;&lt;/script&gt;
+ &lt;script src=&quot;js/jExam.js&quot;&gt;&lt;/script&gt;
+&lt;/script&gt;
+                </code></pre>
+                <h2>html代码中包含如下代码</h2>
+                <pre style="width: 80% "><code>&lt;div class=&quot;question-area div-main-container&quot;&gt;
+
+
+&lt;/div&gt;</code></pre>
+                <h2>构造好题目数据(json)，并调用插件。</h2>
+                <pre style="width: 80% "><code>
+&lt;script&gt;
+
+  var question_data = &#x27;{&quot;id&quot;:&quot;1&quot;,&quot;title&quot;:&quot;计算机网络试题&quot;,&quot;introduction&quot;:&quot;本套测试题5道题，3道选择题，2道判断题&quot;,&quot;user_create_id&quot;:&quot;25&quot;,&quot;user_edit_id&quot;:&quot;25&quot;,&quot;content&quot;:{&quot;questions&quot;:{&quot;unchoices&quot;:[{&quot;q&quot;:&quot;计算机网络中五层协议的体系结构包括如下：&quot;,&quot;a&quot;:[&quot;物理层&quot;,&quot;数据链路层&quot;,&quot;网络层&quot;,&quot;运输层&quot;,&quot;会话层&quot;],&quot;ta&quot;:[&quot;1&quot;,&quot;1&quot;,&quot;1&quot;,&quot;1&quot;,&quot;1&quot;]},{&quot;q&quot;:&quot;数据链路层的作用包括:&quot;,&quot;a&quot;:[&quot;物理地址寻址&quot;,&quot;拥塞控制&quot;,&quot;数据的成帧&quot;,&quot;流量控制&quot;,&quot;数据的检错&quot;],&quot;ta&quot;:[&quot;1&quot;,&quot;1&quot;,&quot;1&quot;,&quot;0&quot;,&quot;1&quot;]},{&quot;q&quot;:&quot;IP 地址的分类有&quot;,&quot;a&quot;:[&quot;B类地址：以0开头&quot;,&quot;B类地址：以10开头&quot;,&quot;C类地址：以110开头&quot;,&quot;C类地址：以1110开头&quot;],&quot;ta&quot;:[&quot;0&quot;,&quot;1&quot;,&quot;1&quot;,&quot;0&quot;]}],&quot;tf&quot;:[{&quot;q&quot;:&quot;RIP协议是一种路由选择协议&quot;,&quot;a&quot;:[&quot;正确&quot;,&quot;错误&quot;],&quot;ta&quot;:&quot;1&quot;},{&quot;q&quot;:&quot;UDP是面向连接的，不可靠的数据报服务&quot;,&quot;a&quot;:[&quot;正确&quot;,&quot;错误&quot;],&quot;ta&quot;:&quot;0&quot;}]}},&quot;created_at&quot;:&quot;2016-10-10 16:04:10&quot;,&quot;updated_at&quot;:&quot;2016-10-10 16:04:10&quot;,&quot;deleted_at&quot;:null}&#x27;;
+
+  $(function () {
+    $(&quot;.question-area&quot;).doquestion(question_data);
+  });
+&lt;/script&gt;
+                </code></pre>
+            </div>
+
+        </div>
+    </section>
+    <section>
+        <h2>在线演示</h2>
+
+        <div class="question-area div-main-container">
+
+
+        </div>
+
+
+        <div class="container clearfix">
+            <div class="row">
+            </div>
+        </div>
+
+    </section>
+
+</div>
+
+
+
+<footer>
+    <div class="wrapper">
+        <div class="container clearfix">
+            <div class="left-col">
+                <a href="https://github.com/chenfucaijun" target="_blank" rel="external">© Lei Chen, 2017</a>
+            </div>
+            <div class="right-col text-right">
+                <a href="https://github.com/chenfucaijun" target="_blank" rel="external">A personal demo</a>
+            </div>
+
+        </div>
+    </div>
+
+</footer>
+
+<a href="https://github.com/chenfucaijun/jExam" target="_blank" rel="external"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+
+</body>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="js/jExam.js"></script>
+<script>
+
+  var question_data = '{"id":"1","title":"计算机网络试题","introduction":"本套测试题5道题，3道选择题，2道判断题","content":{"questions":{"unchoices":[{"q":"计算机网络中五层协议的体系结构包括如下：","a":["物理层","数据链路层","网络层","运输层","会话层"],"ta":["1","1","1","1","1"]},{"q":"数据链路层的作用包括:","a":["物理地址寻址","拥塞控制","数据的成帧","流量控制","数据的检错"],"ta":["1","1","1","0","1"]},{"q":"IP 地址的分类有","a":["B类地址：以0开头","B类地址：以10开头","C类地址：以110开头","C类地址：以1110开头"],"ta":["0","1","1","0"]}],"tf":[{"q":"RIP协议是一种路由选择协议","a":["正确","错误"],"ta":"1"},{"q":"UDP是面向连接的，不可靠的数据报服务","a":["正确","错误"],"ta":"0"}]}}}';
+
+  $(function () {
+    $(".question-area").doquestion(question_data);
+  });
+</script>
+<script>
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+  ga('create', 'UA-93169570-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</html>
+
