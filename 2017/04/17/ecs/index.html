@@ -1,5 +1,4 @@
-<!DOCTYPE html><html lang="zh-cn"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge"><meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"><meta name="format-detection" content="telephone=no"><meta name="format-detection" content="email=no"><meta name="description" content="陈磊的个人网站"><meta name="keywords" content="Hexo, Gruntjs, Nodejs, Reactjs, Vuejs"><title>阿里云ECS环境配置－Ubuntu14.04+php7.0+nginx+mysql - chenlei</title><link rel="stylesheet" href="/css/main_style.min.css"><link rel="icon" href="/favicon.ico"></head><body><input id="navi" type="checkbox"><ul class="main-navication"><li><a href="/"><span>Home</span></a></li><li><a href="https://github.com/chenfucaijun/chenfucaijun.github.io"><span>Github</span></a></li><li><a href="/aboutme"><span>About Me</span></a></li></ul><div class="wrapper" id="wrap"><div class="post-header"><label class="navi-button light" for="navi">MENU</label><img class="background" src="/img/post_background.jpg"><div class="post-title"><h1 class="title">阿里云ECS环境配置－Ubuntu14.04+php7.0+nginx+mysql</h1><ul class="meta"><li><i class="icon icon-author"></i>chenlei</li><li><i class="icon icon-clock"></i>6 Minutes</li><li><i class="icon icon-calendar"></i>2017年4月17日</li></ul></div></div><div class="article-content" style="max-width:800px"><p>##1.安装nginx(版本：1.11.6)</p>
-<ul>
+<!DOCTYPE html><html lang="zh-cn"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge"><meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"><meta name="format-detection" content="telephone=no"><meta name="format-detection" content="email=no"><meta name="description" content="陈磊的个人网站"><meta name="keywords" content="Hexo, Gruntjs, Nodejs, Reactjs, Vuejs"><title>阿里云ECS环境配置－Ubuntu14.04+php7.0+nginx+mysql - chenlei</title><link rel="stylesheet" href="/css/main_style.min.css"><link rel="icon" href="/favicon.ico"></head><body><input id="navi" type="checkbox"><ul class="main-navication"><li><a href="/"><span>Home</span></a></li><li><a href="https://github.com/chenfucaijun/chenfucaijun.github.io"><span>Github</span></a></li><li><a href="/aboutme"><span>About Me</span></a></li></ul><div class="wrapper" id="wrap"><div class="post-header"><label class="navi-button light" for="navi">MENU</label><img class="background" src="/img/post_background.jpg"><div class="post-title"><h1 class="title">阿里云ECS环境配置－Ubuntu14.04+php7.0+nginx+mysql</h1><ul class="meta"><li><i class="icon icon-author"></i>chenlei</li><li><i class="icon icon-clock"></i>6 Minutes</li><li><i class="icon icon-calendar"></i>2017年4月17日</li></ul></div></div><div class="article-content" style="max-width:800px"><h2 id="1-安装nginx-版本：1-11-6"><a href="#1-安装nginx-版本：1-11-6" class="headerlink" title="1.安装nginx(版本：1.11.6)"></a>1.安装nginx(版本：1.11.6)</h2><ul>
 <li><p>1、自动安装最新版的nginx</p>
 <blockquote>
 <p>wget -O - <a href="http://nginx.org/keys/nginx_signing.key" target="_blank" rel="external">http://nginx.org/keys/nginx_signing.key</a> | sudo apt-key add -</p>
@@ -27,8 +26,7 @@
 </blockquote>
 </li>
 </ul>
-<p>##2.安装php7(版本7.0.13)</p>
-<ul>
+<h2 id="2-安装php7-版本7-0-13"><a href="#2-安装php7-版本7-0-13" class="headerlink" title="2.安装php7(版本7.0.13)"></a>2.安装php7(版本7.0.13)</h2><ul>
 <li><p>1、添加PPA，添加过程中需要按一次回车（Enter）键</p>
 <blockquote>
 <p>sudo apt-get install python-software-properties software-properties-common<br>sudo add-apt-repository ppa:ondrej/php<br>sudo apt-get update</p>
@@ -52,8 +50,7 @@
 </blockquote>
 </li>
 </ul>
-<p>##3.安装mysql（5.5.3）</p>
-<blockquote>
+<h2 id="3-安装mysql（5-5-3）"><a href="#3-安装mysql（5-5-3）" class="headerlink" title="3.安装mysql（5.5.3）"></a>3.安装mysql（5.5.3）</h2><blockquote>
 <p>sudo apt-get install mysql-server-5.5 mysql-client-5.5<br>途中会提示设置MySQL的密码，安装好后：</p>
 <p>mysql -uroot -p<br>然后输入刚刚设置的密码，能成功进入即成功安装</p>
 </blockquote>
@@ -89,7 +86,7 @@
 <blockquote>
 <p>以上都配置成功后，<br>重启nginx:   sudo service restart<br>重启php: sudo service php7.0-fpm restart<br>访问你的IP，即可访问到/var/www/website下的index.php</p>
 </blockquote>
-</div><div class="article-meta" style="max-width:800px"></div><ul class="navication"><li class="home"><a href="/"><i class="icon icon-home"></i></a></li><li><a href="/2017/04/17/laravelBasedNginxAndPhp/"><i class="icon icon-arror-left"></i></a></li><li><a href="/2017/03/29/hello-world/"><i class="icon icon-arror-right"></i></a></li></ul><div class="page-footer"><div class="top"><ul class="social"><li><a href="https://github.com/chenfucaijun/chenfucaijun.github.io" title="Github" target="_blank"><i class="icon icon-github"></i></a></li><li><a href="https://weibo.com/jackclay" title="Weibo" target="_blank"><i class="icon icon-weibo"></i></a></li><li><a href="Mailto:chenlei163mail@163.com" title="Email" target="_blank"><i class="icon icon-email"></i></a></li></ul></div><div class="bottom"><p class="copyright">© 2017 chenlei<br><small>POWER BY <a href="https://hexo.io" target="_blank">HEXO</a></small><small>, THEME BY <a href="https://github.com/BoizZ/hexo-theme-laughing" target="_blank">LAUGHING</a></small></p></div></div></div><script>var wrap = document.getElementById('wrap');
+</div><div class="article-meta" style="max-width:800px"></div><ul class="navication"><li class="home"><a href="/"><i class="icon icon-home"></i></a></li><li><a href="/2017/04/17/laravelBasedNginxAndPhp/"><i class="icon icon-arror-right"></i></a></li></ul><div class="page-footer"><div class="top"><ul class="social"><li><a href="https://github.com/chenfucaijun/chenfucaijun.github.io" title="Github" target="_blank"><i class="icon icon-github"></i></a></li><li><a href="https://weibo.com/jackclay" title="Weibo" target="_blank"><i class="icon icon-weibo"></i></a></li><li><a href="Mailto:chenlei163mail@163.com" title="Email" target="_blank"><i class="icon icon-email"></i></a></li></ul></div><div class="bottom"><p class="copyright">© 2017 chenlei<br><small>POWER BY <a href="https://hexo.io" target="_blank">HEXO</a></small><small>, THEME BY <a href="https://github.com/BoizZ/hexo-theme-laughing" target="_blank">LAUGHING</a></small></p></div></div></div><script>var wrap = document.getElementById('wrap');
 window.onload = function () {
   wrap.className += ' done';
 };
