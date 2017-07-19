@@ -1,5 +1,8 @@
 (function ($) {
   $.fn.doquestion = function (question_data) {
+    
+    
+    console.log(22222);
     var defaults = {
       questions: null,
       startImg: 'images/start.gif'
@@ -146,6 +149,7 @@
     //所有题目区域
     questionContent += choicesContent + mchoicesContent + unchoicesContent + tfContent + '';
     
+
     
     //右边提示区域
     divRightContent += ' <div class="div-right"><div class="div-paper-info"> <p class="qpaper-name">信息安全测试题</p> <p class="qpaper-info">出题单位：CUC信安实验室</p> </div>';
@@ -171,7 +175,9 @@
     superContainer.addClass('div-main-container');
     
     //初始化完毕
-    superContainer.html(divMain + divRightContent);
+    superContainer.html(divMain );
+    superContainer.append(divRightContent);
+   
     //添加模态框提示
     superContainer.after('<div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-body">                    你确定要交卷吗?</div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">取消</button><button type="button" class="btn btn-primary final_submit_button" data-dismiss="modal" onclick="$().saveAndScore(question_data)">                        确定</button></div></div></div></div><div class="modal fade" id="timeDeadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-body">                    请快点答题哦，不然要自动交卷咯</div><div class="modal-footer"><button type="button" class="btn btn-primary" data-dismiss="modal">                        确定</button></div></div></div></div>');
     
@@ -443,7 +449,6 @@
       
     });
     
-    
   }
   
   
@@ -679,7 +684,7 @@
     //渲染结果页面
     console.log("---------答对数");
     console.log(true_question_num);
-  
+    
     console.log("---------总数");
     var total_num = obj.content.questions.unchoices.length+obj.content.questions.tf.length;
     console.log(total_num);
@@ -690,14 +695,14 @@
     
     var result_title = obj.title;
     console.log(obj.title);
-  
+    
     var result_time = obj.time;
-  
+    
     console.log(obj.time);
-  
-
+    
+    
     var result_html='<div class="result-div-paper-info clearfix"><div class="result-left-info"><div><h5>试卷:  '+result_title+'</h5></div><div><h5>正确题数/总题数: '+true_question_num+'/'+total_num +'</h5></div><div><h5>用 时: '+result_time+'</h5></div></div><div class="result-right-info"><div><h5>正确率</h5></div><div class="result-score">'+true_rate+'\u0025</div></div></div>';
-   
+    
     $('.question-area').html(result_html);
     
   }

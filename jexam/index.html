@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
     <title>jExam</title>
 
@@ -30,6 +29,8 @@
         <h1 class="logo"><span>jExam</span>.js</h1>
     </div>
 </header>
+
+
 <div class="wrapper">
     <h2 class="sub">Make Exam Question Online Quickly! <br>让在线做试题更快捷！</h2>
     <section class="container clearfix">
@@ -52,15 +53,15 @@
 &lt;link href=&quot;https://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot;&gt;
 &lt;link href=&quot;https://cdn.bootcss.com/flat-ui/2.3.0/css/flat-ui.min.css&quot; rel=&quot;stylesheet&quot;&gt;
 &lt;link rel=&quot;stylesheet&quot; href=&quot;css/jExam.css&quot;&gt;
-                                </code></pre>
+</code></pre>
                 <h2>js</h2>
                 <pre style="width: 80% "><code>
 &lt;script&gt;
- &lt;script src=&quot;https://code.jquery.com/jquery-2.2.4.min.js&quot;&gt;&lt;/script&gt;
- &lt;script src=&quot;https://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js&quot;&gt;&lt;/script&gt;
- &lt;script src=&quot;js/jExam.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://code.jquery.com/jquery-2.2.4.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/jExam.js&quot;&gt;&lt;/script&gt;
 &lt;/script&gt;
-                </code></pre>
+</code></pre>
                 <h2>html代码中包含如下代码</h2>
                 <pre style="width: 80% "><code>&lt;div class=&quot;question-area div-main-container&quot;&gt;
 
@@ -70,35 +71,41 @@
                 <pre style="width: 80% "><code>
 &lt;script&gt;
 
-  var question_data = &#x27;{&quot;id&quot;:&quot;1&quot;,&quot;title&quot;:&quot;计算机网络试题&quot;,&quot;introduction&quot;:&quot;本套测试题5道题，3道选择题，2道判断题&quot;,&quot;user_create_id&quot;:&quot;25&quot;,&quot;user_edit_id&quot;:&quot;25&quot;,&quot;content&quot;:{&quot;questions&quot;:{&quot;unchoices&quot;:[{&quot;q&quot;:&quot;计算机网络中五层协议的体系结构包括如下：&quot;,&quot;a&quot;:[&quot;物理层&quot;,&quot;数据链路层&quot;,&quot;网络层&quot;,&quot;运输层&quot;,&quot;会话层&quot;],&quot;ta&quot;:[&quot;1&quot;,&quot;1&quot;,&quot;1&quot;,&quot;1&quot;,&quot;1&quot;]},{&quot;q&quot;:&quot;数据链路层的作用包括:&quot;,&quot;a&quot;:[&quot;物理地址寻址&quot;,&quot;拥塞控制&quot;,&quot;数据的成帧&quot;,&quot;流量控制&quot;,&quot;数据的检错&quot;],&quot;ta&quot;:[&quot;1&quot;,&quot;1&quot;,&quot;1&quot;,&quot;0&quot;,&quot;1&quot;]},{&quot;q&quot;:&quot;IP 地址的分类有&quot;,&quot;a&quot;:[&quot;B类地址：以0开头&quot;,&quot;B类地址：以10开头&quot;,&quot;C类地址：以110开头&quot;,&quot;C类地址：以1110开头&quot;],&quot;ta&quot;:[&quot;0&quot;,&quot;1&quot;,&quot;1&quot;,&quot;0&quot;]}],&quot;tf&quot;:[{&quot;q&quot;:&quot;RIP协议是一种路由选择协议&quot;,&quot;a&quot;:[&quot;正确&quot;,&quot;错误&quot;],&quot;ta&quot;:&quot;1&quot;},{&quot;q&quot;:&quot;UDP是面向连接的，不可靠的数据报服务&quot;,&quot;a&quot;:[&quot;正确&quot;,&quot;错误&quot;],&quot;ta&quot;:&quot;0&quot;}]}},&quot;created_at&quot;:&quot;2016-10-10 16:04:10&quot;,&quot;updated_at&quot;:&quot;2016-10-10 16:04:10&quot;,&quot;deleted_at&quot;:null}&#x27;;
+var question_data = &#x27;{&quot;id&quot;:&quot;1&quot;,&quot;title&quot;:&quot;计算机网络试题&quot;,&quot;introduction&quot;:&quot;本套测试题5道题，3道选择题，2道判断题&quot;,&quot;user_create_id&quot;:&quot;25&quot;,&quot;user_edit_id&quot;:&quot;25&quot;,&quot;content&quot;:{&quot;questions&quot;:{&quot;unchoices&quot;:[{&quot;q&quot;:&quot;计算机网络中五层协议的体系结构包括如下：&quot;,&quot;a&quot;:[&quot;物理层&quot;,&quot;数据链路层&quot;,&quot;网络层&quot;,&quot;运输层&quot;,&quot;会话层&quot;],&quot;ta&quot;:[&quot;1&quot;,&quot;1&quot;,&quot;1&quot;,&quot;1&quot;,&quot;1&quot;]},{&quot;q&quot;:&quot;数据链路层的作用包括:&quot;,&quot;a&quot;:[&quot;物理地址寻址&quot;,&quot;拥塞控制&quot;,&quot;数据的成帧&quot;,&quot;流量控制&quot;,&quot;数据的检错&quot;],&quot;ta&quot;:[&quot;1&quot;,&quot;1&quot;,&quot;1&quot;,&quot;0&quot;,&quot;1&quot;]},{&quot;q&quot;:&quot;IP 地址的分类有&quot;,&quot;a&quot;:[&quot;B类地址：以0开头&quot;,&quot;B类地址：以10开头&quot;,&quot;C类地址：以110开头&quot;,&quot;C类地址：以1110开头&quot;],&quot;ta&quot;:[&quot;0&quot;,&quot;1&quot;,&quot;1&quot;,&quot;0&quot;]}],&quot;tf&quot;:[{&quot;q&quot;:&quot;RIP协议是一种路由选择协议&quot;,&quot;a&quot;:[&quot;正确&quot;,&quot;错误&quot;],&quot;ta&quot;:&quot;1&quot;},{&quot;q&quot;:&quot;UDP是面向连接的，不可靠的数据报服务&quot;,&quot;a&quot;:[&quot;正确&quot;,&quot;错误&quot;],&quot;ta&quot;:&quot;0&quot;}]}},&quot;created_at&quot;:&quot;2016-10-10 16:04:10&quot;,&quot;updated_at&quot;:&quot;2016-10-10 16:04:10&quot;,&quot;deleted_at&quot;:null}&#x27;;
 
-  $(function () {
-    $(&quot;.question-area&quot;).doquestion(question_data);
-  });
+$(function () {
+$(&quot;.question-area&quot;).doquestion(question_data);
+});
 &lt;/script&gt;
-                </code></pre>
+</code></pre>
             </div>
 
         </div>
     </section>
-    <section>
-        <h2>在线演示</h2>
 
-        <div class="question-area div-main-container">
-
-
-        </div>
-
-
-        <div class="container clearfix">
-            <div class="row">
-            </div>
-        </div>
-
-    </section>
 
 </div>
 
+<section>
+    <h2>在线演示</h2>
+
+    <div class="question-area ">
+
+
+    </div>
+
+
+    <div class="container clearfix">
+        <div class="row">
+        </div>
+    </div>
+
+</section>
+
+<div class="container ">
+    <div class="row">
+    </div>
+</div>
 
 
 <footer>
@@ -129,6 +136,8 @@
   $(function () {
     $(".question-area").doquestion(question_data);
   });
+
+
 </script>
 <script>
   (function (i, s, o, g, r, a, m) {
@@ -149,4 +158,6 @@
 </script>
 
 </html>
+
+
 

@@ -13,7 +13,7 @@ body {
 
 @font-face {
     font-family: Flat-UI-Icons;
-    src: url(../fonts/Flat-UI-Icons.eot?#iefix) format('embedded-opentype'), url(https://chenfucaijun.github.io/fonts/Flat-UI-Icons.woff) format('woff'), url(https://chenfucaijun.github.io/fonts/Flat-UI-Icons.ttf) format('truetype');
+    src: url(../fonts/Flat-UI-Icons.eot?#iefix) format('embedded-opentype'), url(../fonts/Flat-UI-Icons.woff) format('woff'), url(../fonts/Flat-UI-Icons.ttf) format('truetype');
     font-weight: 400;
     font-style: normal
 }
